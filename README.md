@@ -18,7 +18,7 @@ table, with renamed fields.
 ## importing data from a postgresql custom dump
 
 ```ruby
-pg*restore --verbose  --no-acl --no-owner --clean -d shelter-development DUMPNAME.dump
+pg_restore --verbose  --no-acl --no-owner --clean -d shelter-development DUMPNAME.dump
 ```
 
 ## importing data from files/first principles
