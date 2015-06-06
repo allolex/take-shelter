@@ -6,14 +6,21 @@
   %p
     = submit_tag 'Find shelters near ZIP'
 - unless @shelters.blank?
+  = static_map @shelters
   %h2 Found Shelters:
   %table
     %thead
       %tr
         %th name
         %th address
+        %th coord
     %tbody
       - @shelters.each do |shelter|
         %tr
           %td= shelter.name
-          %td= shelter.address
+          %td
+            #{shelter.address},
+            = shelter.city
+            = shelter.zipcode
+
+          %td= shelter.as_latlon
