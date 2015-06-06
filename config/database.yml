@@ -6,20 +6,20 @@
 #
 default: &default
   adapter: postgresql
+  encoding: unicode
   pool: 5
-  timeout: 5000
 
 development:
   <<: *default
-  database: shelter-development
+  database: take-shelter-development
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: shelter-test
+  database: take-shelter-test
 
 production:
   <<: *default
-  database: shelter-production
+  database: take-shelter-production
