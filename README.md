@@ -2,9 +2,12 @@
 
 ## importing data
 
+This process creates the `hurricaneshelter` table, which is why it doesn't have
+a migration.
+
 1. Have postgresql, postgis, and gdal with postgres support installed.
 `brew install gdal --with-postgres; brew install postgis` does this.
 2. `rake db:create` if you haven't coreated the database already.
-3. `ogr2ogr -f "PostgreSQL" PG:"dbname=take-shelter-development" vendor/HurricaneShelter.shp`
+3. `rake import:shelter`
 4. Now you have a database table called `hurricaneshelter` full of shelter
 locations.
