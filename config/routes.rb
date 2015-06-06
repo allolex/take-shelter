@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  root to: 'shelters#index'
+
   get 'answer/query' => "answer#query"
 
   post 'answer/message' => "answer#message"
