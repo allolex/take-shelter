@@ -6,7 +6,7 @@ namespace :import do
   task :shelter => ts_f
 
   file ts_f => %w{vendor/HurricaneShelter.shp vendor/HurricaneShelter.shx} do
-    sh 'ogr2ogr -f "PostgreSQL" PG:"dbname=take-shelter-development" vendor/HurricaneShelter.shp -overwrite'
+    sh 'ogr2ogr -f "PostgreSQL" PG:"dbname=shelter-development" vendor/HurricaneShelter.shp -overwrite'
     sh "touch #{ts_f}"
 
   end
