@@ -5,7 +5,7 @@ class AnswerController < ApplicationController
 
   def message
     twiml = Twilio::TwiML::Response.new do |r|
-      r.Message "Hello, thanks for the message."
+      r.Message I18n.t(:stay_with_friends, scope: :shelter)
     end
     render plain: twiml.text
   end

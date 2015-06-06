@@ -20,4 +20,7 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  help:
+    main: "Reply with your zip code for the nearest shelter. We will also send directions to it."
+  shelter:
+    stay_with_friends: "If you can go stay with friends or family, you should do that as your first choice."
