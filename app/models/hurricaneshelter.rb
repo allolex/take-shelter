@@ -12,4 +12,11 @@ class Hurricaneshelter < ActiveRecord::Base
 
     distance_order zip.as_latlon
   end
+
+  def as_latlon
+    LatLon.new.tap do |ll|
+      ll.lat = lat
+      ll.lon = lon
+    end
+  end
 end
