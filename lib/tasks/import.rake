@@ -3,6 +3,8 @@ namespace :import do
   shelter_ts = "tmp/shelter-import"
   zipcode_ts = "tmp/zipcode-import"
 
+  dbname = TakeShelter::Application.config.database_configuration[Rails.env]['database']
+
   desc "import everything"
   task :all => %i(shelter zipcode)
 
@@ -10,7 +12,7 @@ namespace :import do
   task :shelter => shelter_ts
 
   file shelter_ts => %w{environment vendor/HurricaneShelter.shp vendor/HurricaneShelter.shx} do
-    sh 'ogr2ogr -f "PostgreSQL" PG:"dbname=shelter-development" vendor/HurricaneShelter.shx'
+    sh "ogr2ogr -f 'PostgreSQL' PG:'dbname=#{dbname}' vendor/HurricaneShelter.shx"
     ActiveRecord::Base.connection.execute <<-SQL
       UPDATE hurricaneshelter SET wkb_geometry=ST_SetSRID(ST_Point(lon, lat), 900914);
       CREATE VIEW hurricaneshelters AS
@@ -45,7 +47,7 @@ namespace :import do
   task :zipcode => zipcode_ts
 
   file zipcode_ts => ['vendor/Zipcode.json', 'environment'] do
-    sh 'ogr2ogr -f "PostgreSQL" -select ZIPCODE PG:"dbname=shelter-development" vendor/Zipcode.json -nln zipcode'
+    sh "ogr2ogr -f 'PostgreSQL' -select ZIPCODE PG:'dbname=#{dbname}' vendor/Zipcode.json -nln zipcode"
         ActiveRecord::Base.connection.execute <<-SQL
       CREATE VIEW zipcodes AS
         SELECT
