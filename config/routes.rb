@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  get 'answer/query' => "answer#query"
-
   post 'answer/message' => "answer#message"
 
   # The priority is based upon order of creation: first created -> highest priority.

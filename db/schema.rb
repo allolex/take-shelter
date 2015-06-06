@@ -11,11 +11,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150606165621) do
+ActiveRecord::Schema.define(version: 20150606201945) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
+
+  create_table "callers", force: :cascade do |t|
+    t.string   "phone"
+    t.string   "language"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "queries", force: :cascade do |t|
+    t.string   "body"
+    t.string   "from"
+    t.string   "to"
+    t.string   "account_sid"
+    t.string   "message_sid"
+    t.integer  "caller_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "queries", ["caller_id"], name: "index_queries_on_caller_id", using: :btree
 
   create_table "spatial_ref_sys", primary_key: "srid", force: :cascade do |t|
     t.string  "auth_name", limit: 256
@@ -24,4 +44,5 @@ ActiveRecord::Schema.define(version: 20150606165621) do
     t.string  "proj4text", limit: 2048
   end
 
+  add_foreign_key "queries", "callers"
 end
